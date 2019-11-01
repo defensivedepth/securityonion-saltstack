@@ -20,6 +20,9 @@ cortex_init(){
     # Create intial Cortex user
     curl -v -k "https://$CORTEX_IP/cortex/api/user" -H "Content-Type: application/json" -d "{\"login\" : \"$CORTEX_USER\",\"name\" : \"$CORTEX_USER\",\"roles\" : [\"read\",\"alert\",\"write\",\"admin\"],\"preferences\" : \"{}\",\"password\" : \"$CORTEX_PASSWORD\", \"key\": \"$CORTEX_KEY\"}"
 
+    # Enable URLScan.io Analyzer
+    curl -k -XPOST -H 'Authorization: Bearer $CORTEX_KEY' -H 'Content-Type: application/json' 'https://$CORTEX_IP/cortex/api/organization/analyzer/Urlscan_io_Search_0_1_0' -d '{"name":"Urlscan_io_Search_0_1_0","configuration":{"auto_extract_artifacts":false,"check_tlp":true,"max_tlp":2}}'
+    
     # Update SOCtopus config with apikey value
     #sed -i "s/cortex_key = .*/cortex_key = $CORTEX_KEY/" $SOCTOPUS_CONFIG
 
