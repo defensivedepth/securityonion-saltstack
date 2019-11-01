@@ -105,6 +105,12 @@ so-cortex:
       - /opt/so/conf/hive/etc/cortex-application.conf:/opt/cortex/conf/application.conf:ro
     - port_bindings:
       - 0.0.0.0:9001:9001
+    
+cortexscript:
+  cmd.script:
+    - source: salt://hive/thehive/scripts/cortex_init.sh
+    - cwd: /opt/so
+    - template: jinja
 
 so-thehiveimage:
  cmd.run:
